@@ -17,7 +17,7 @@ main {
     text-align: center;
 }
 
-h1 { 
+h1, h2 { 
     font-size: 1.8rem; 
     font-style: italic;
     text-align: center;
@@ -25,7 +25,15 @@ h1 {
     margin-top: 6rem;
 }
 
-button {
+p {
+    font-size: 1rem; 
+    font-style: italic;
+    text-align: center;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+button, a {
     font-size: 1.3rem;
     width: 15rem;
     height: 3rem;
@@ -35,7 +43,16 @@ button {
     text-align: center;
 }
 
-button:hover {
-    font-size: 1.5rem;
+button:hover, a:hover {
+    font-size: 1.2rem;
     color: chocolate;
+}
+
+input {
+    text-align: center;
+    box-shadow: none;
+    width: 15rem;
+    height: 3rem;
+    display: block;
+    margin: auto;
 }

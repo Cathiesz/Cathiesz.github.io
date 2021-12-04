@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Join a game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./css/mainStyle.css">
+    <script type="text/javascript" src="./js/generator.js"></script>
+  </head>
+  <body>
+    <header>
+        <h1>The Amazing Game</h1>
+        <h2>Join a Game</h2>
+    </header>
+    <p>Please insert the 4 digit number you see on your Computer</p>
+    <input name="input_id" type="text" maxlength="4" id="input_id" placeholder="XXXX" class="searchField">
+    <button type="button" onclick="getInputValue();">Get Value</button>
+    <script>
+        function getInputValue() {
+            var inputVal = document.getElementById("input_id").value;
+            window.location = "http://cathiesz.github.io/mobile/" + inputVal;
+        }
+    </script>
+  </body>
+</html>
+

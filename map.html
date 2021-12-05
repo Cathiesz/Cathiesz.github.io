@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Map</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./css/mainStyle.css">
+    <script>
+      let x = Math.floor((Math.random() * 100) + 1);
+      document.getElementById("number").innerHTML = x;
+      </script>
+  </head>
+  <body>
+    <div class="alert">
+      <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+      <h3>Game Rules</h3>
+      <p>Please connect your mobile device to the game using the code</p>
+        <p id="number">
+        </p>
+      <p>If your device is connected close this banner and get startet digging!</p>
+    </div>
+    <div class="map">
+      <div class="sensor"></div>
+    </div>    
+  </body>
+  
+</html>

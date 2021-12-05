@@ -65,10 +65,11 @@ input {
 
 .map {
     position: relative;
-    width : 200px;
-    height: 200px;
+    width : 100%;
+    height: 100%;
     border: 5px solid #CCC;
     border-radius: 10px;
+    z-index: 0;
   }
   
   .sensor {
@@ -79,6 +80,7 @@ input {
     height: 20px;
     background: green;
     border-radius: 100%;
+    z-index: 1;
   }
 
 /* The alert message box */
@@ -91,6 +93,7 @@ input {
     margin-left: 12rem;
     margin-right: 12rem;
     text-align: center;
+    z-index: 2;
   }
   
   /* The close button */

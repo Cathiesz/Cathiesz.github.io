@@ -113,6 +113,22 @@ input {
     color: rgb(128, 118, 118);
   }
 
+  .digbtn {
+    font-size: 22px;
+    text-align: center;
+    width: 15rem;
+    height: 3rem;
+    box-shadow: none;
+    border: ghostwhite;
+    background-color: whitesmoke;
+  }
+
+  .digbtn:hover {
+    font-size: 1.2rem;
+    color: chocolate;
+  }
+
+
  @media screen and (orientation: portrait) {
      .sensor {
          position: absolute;

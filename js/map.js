@@ -3,9 +3,8 @@ var myObstacles = [];
 var myScore;
 
 
-
 var myGameArea = {
-  canvas : document.getElementById("#canvas"),
+  canvas : document.getElementById("#map"),
   start : function() {
       this.canvas.width = 480;
       this.canvas.height = 270;
@@ -25,7 +24,7 @@ var myGameArea = {
 
 
 function startGame() {
-  myGamePiece = new component(30, 30, "red", 10, 160);
+  myGamePiece = document.getElementById("#sensor");
   myScore = new component("30px", "Consolas", "black", 280, 40, "text");
   myGameArea.start();
 }
@@ -61,4 +60,49 @@ function updateGameArea() {
   myScore.update();
   myGamePiece.newPos();    
   myGamePiece.update();
+}
+
+function component(width, height, color, x, y, type) {
+    this.type = type;
+    this.width = width;
+    this.height = height;
+    this.speedX = 0;
+    this.speedY = 0;    
+    this.x = x;
+    this.y = y;    
+    this.update = function() {
+        ctx = myGameArea.context;
+        if (this.type == "text") {
+            ctx.font = this.width + " " + this.height;
+            ctx.fillStyle = color;
+            ctx.fillText(this.text, this.x, this.y);
+        } else {
+            ctx.fillStyle = color;
+            ctx.fillRect(this.x, this.y, this.width, this.height);
+        }
+    }
+    this.newPos = function() {
+        this.x += this.speedX;
+        this.y += this.speedY;        
+    }
+    this.crashWith = function(otherobj) {
+        var myleft = this.x;
+        var myright = this.x + (this.width);
+        var mytop = this.y;
+        var mybottom = this.y + (this.height);
+        var otherleft = otherobj.x;
+        var otherright = otherobj.x + (otherobj.width);
+        var othertop = otherobj.y;
+        var otherbottom = otherobj.y + (otherobj.height);
+        var crash = true;
+        if ((mybottom < othertop) || (mytop > otherbottom) || (myright < otherleft) || (myleft > otherright)) {
+            crash = false;
+        }
+        return crash;
+    }
+}
+
+function everyinterval(n) {
+    if ((myGameArea.frameNo / n) % 1 == 0) {return true;}
+    return false;
 }

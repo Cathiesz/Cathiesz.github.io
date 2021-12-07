@@ -63,13 +63,25 @@ input {
     margin: auto;
 }
 
+.canvas {
+  display: block;
+  margin: 3rem;
+  margin-bottom: 1rem;
+  margin-top: 6rem;
+  text-align: center;
+}
+
 #map {
-    position: relative;
-    width : 100%;
-    height: 100%;
-    border: 5px solid #CCC;
-    border-radius: 10px;
-    z-index: 0;
+  position: relative;
+  width: 500px;
+  height: 200px;
+  border: 5px solid black;
+  border-radius: 30px;
+  margin-bottom: 1rem;
+  margin-top: 6rem;
+  margin-left: 3rem;
+  margin-right: 3rem;
+  -moz-border-radius: 10px;
   }
   
   #sensor {
@@ -121,9 +133,12 @@ input {
     box-shadow: none;
     border: ghostwhite;
     background-color: whitesmoke;
+    display:block;
+    margin-bottom: 1rem;
+    margin-top: 6rem;
   }
 
-  .digbtn:hover {
+  .digbtn::selection {
     font-size: 1.2rem;
     color: chocolate;
   }

@@ -5,12 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="./css/mainStyle.css">
     <script type="text/javascript" src="./js/searchForTreasure.js"></script>
+    <script type="text/javascript" src="./js/timer.js"></script>
   </head>
   <body>
-    <div id="map">
-      <div id="sensor"></div>
-    </div>    
-    <button className="digbtn">Dig!</button>
+    <div>
+      <p id="time"></p>
+      <p>Score: </p>
+    </div>
+    <div class="canvas">
+      <div id="map" class="map">
+        <div id="sensor" class="sensor"></div>
+      </div>    
+      <button className="digbtn">Dig!</button>
+  </div>
   </body>
  
 </html>

@@ -1,6 +1,3 @@
-
-var click;
-
 var map = document.querySelector('.map');
 var sensor = document.querySelector('.sensor');
 var maxX = map.clientWidth - sensor.clientWidth;
@@ -8,15 +5,7 @@ var maxY = map.clientWidth - sensor.clientWidth;
 var initialX = null;
 var initialY = null;
 
-function digging(partOfMap) {
-    if (click == 10) {
-        digged = document.querySelector(partOfMap);
-        digged.update;
-        click = 0;
-    } else {
-        click++;
-    }
-}
+// Handle the orientation if the device is a smartphone 
 
 function handleOrientationEvent(event) {
 
@@ -40,41 +29,28 @@ function handleOrientationEvent(event) {
   }
 }
 
-hookEvent(document, "keydown", function(event) {
-    var element, left, top;
-
-    element = document.getElementById("sensor");
-    left = parseInt(element.style.left, 10);
-    top  = parseInt(element.style.top, 10);
-    switch (event.which || event.keyCode) {
-        case 37: // Left
-            left = Math.max(0, left - 10);
-            break;
-        case 39: // Right
-            left += 10;
-            break;
-        case 38: // Up
-            top = Math.max(0, top - 10);
-            break;
-        case 40: // Down
-            top += 10;
-            break;
-    }
-    element.style.left = left + "px";
-    element.style.top  = top  + "px";
-
-    // Stop propagation and prevent default
-    event.stopPropagation();
-    event.preventDefault();
-});
-
-function isEventFired() {
-  if (!initialX && !initialY) {
-    hookEvent();
-  }
+function moveup() {
+  myGamePiece.speedY = -1; 
 }
 
-// Webkit en Mozilla variant beide registreren.
+function movedown() {
+  myGamePiece.speedY = 1; 
+}
+
+function moveleft() {
+  myGamePiece.speedX = -1; 
+}
+
+function moveright() {
+  myGamePiece.speedX = 1; 
+}
+
+function clearmove() {
+  myGamePiece.speedX = 0; 
+  myGamePiece.speedY = 0; 
+}
+
+// Webkit and Mozilla variant beide registreren.
 window.addEventListener("MozOrientation", handleOrientationEvent, true);
 window.addEventListener("deviceorientation", handleOrientationEvent, true);
 

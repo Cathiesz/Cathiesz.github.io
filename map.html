@@ -10,12 +10,6 @@
     <script type="text/javascript" src="./js/map.js" ></script>
   </head>
   <body onload="startGame()">
-    <div>
-      <p>Timer: </p>
-      <p id="time"></p>
-      <p>Score: </p>
-      <p id="score"></p>
-    </div>
     <script>
       var myGamePiece;
       var myObstacles = [];
@@ -31,8 +25,8 @@ function startGame() {
 var myGameArea = {
     canvas : document.createElement("canvas"),
     start : function() {
-        this.canvas.width = 480;
-        this.canvas.height = 480;
+        this.canvas.width = window.innerWidth;
+        this.canvas.height = 400;
         this.context = this.canvas.getContext("2d");
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
         this.frameNo = 0;
@@ -114,8 +108,8 @@ function updateGameArea() {
         minGap = 50;
         maxGap = 200;
         gap = Math.floor(Math.random()*(maxGap-minGap+1)+minGap);
-        myObstacles.push(new component(10, 10, "green", Math.random() * maxHeight, Math.random() * maxHeight ));
-        myBoni.push(new component(10, 10, "blue", Math.random() * maxHeight, Math.random() * maxHeight ))
+        myObstacles.push(new component(10, 10, "green", Math.random() * 400, Math.random() * window.innerWidth));
+        myBoni.push(new component(10, 10, "blue", Math.random() * 400, Math.random() * window.innerWidth ))
     }
     for (i = 0; i < myObstacles.length; i += 1) {
         myObstacles[i].speedX = 0;

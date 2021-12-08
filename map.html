@@ -17,8 +17,8 @@
       var myScore;
 
 function startGame() {
-    myGamePiece = new component(30, 30, "red", 10, 120);
-    myScore = new component("20px", "Consolas", "black", 0, 40, "text");
+    myGamePiece = new component(30, 30, "red", 10, 120, "player");
+    myScore = new component("20px", "Score", "black", 0, 40, "text");
     myGameArea.start();
 }
 
@@ -56,8 +56,9 @@ function component(width, height, color, x, y, type) {
     this.speedY = 0;    
     this.x = x;
     this.y = y;    
-    this.angle = 0;
-    this.moveAngle = 0;
+    this.moveUpDown = 0;
+    this.moveLeftRight = 0;
+
     this.update = function() {
         ctx = myGameArea.context;
         if (this.type == "text") {
@@ -66,15 +67,12 @@ function component(width, height, color, x, y, type) {
             ctx.fillText(this.text, this.x, this.y);
         } else {
             ctx.fillStyle = color;
-            ctx.fillRect(this.x, this.y, this.width, this.height);
-            ctx.rotate(this.angle);  
+            ctx.fillRect(this.x, this.y, this.width, this.height);  
         }
     }
     this.newPos = function() {
-      this.angle += this.moveAngle * Math.PI / 180;
-        this.x += this.speedX * Math.sin(this.angle);
-        this.y += this.speedY * Math.cos(this.angle);   
-
+        this.x += this.moveUpDown;
+        this.y += this.moveLeftRight;   
     }
     this.crashWith = function(otherobj) {
         var myleft = this.x;
@@ -146,12 +144,12 @@ function updateGameArea() {
         myBoni[i].update();
     }
 
-    if (myGameArea.keys && myGameArea.keys[37]) {myGamePiece.moveAngle = -1; }
-    if (myGameArea.keys && myGameArea.keys[39]) {myGamePiece.moveAngle = 1; }
-    if (myGameArea.keys && myGameArea.keys[38]) {myGamePiece.speed= 1; }
-    if (myGameArea.keys && myGameArea.keys[40]) {myGamePiece.speed= -1; }
+    if (myGameArea.keys && myGameArea.keys[37]) {myGamePiece.moveLeftRight = -1; }
+    if (myGameArea.keys && myGameArea.keys[39]) {myGamePiece.moveLeftRight = 1; }
+    if (myGameArea.keys && myGameArea.keys[38]) {myGamePiece.moveUpDown= 1; }
+    if (myGameArea.keys && myGameArea.keys[40]) {myGamePiece.moveUpDown= -1; }
 
-    
+
     myScore.text="SCORE: " + myGameArea.frameNo;
     myScore.update();
     myGamePiece.newPos();    
@@ -161,22 +159,6 @@ function updateGameArea() {
 function everyinterval(n) {
     if ((myGameArea.frameNo / n) % 1 == 0) {return true;}
     return false;
-}
-
-function moveup() {
-    myGamePiece.speedY = -1; 
-}
-
-function movedown() {
-    myGamePiece.speedY = 1; 
-}
-
-function moveleft() {
-    myGamePiece.speedX = -1; 
-}
-
-function moveright() {
-    myGamePiece.speedX = 1; 
 }
 
 function clearmove() {

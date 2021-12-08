@@ -4,6 +4,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="./css/mainStyle.css">
         <script src="https:://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script type="text/javascript" src="./js/map.js"></script>
     </head>
     <body>
         <div id="footer-cookie">
@@ -16,7 +17,7 @@
             var footerCookie = document.querySelector("#footer-cookie");
             var footerCookieAccept = document.querySelector("#accept");
         
-            if (document.cookie.indexOf("dakitecCookieBanner=") == -1) {
+            if (document.cookie.indexOf("score=") == 0) {
               footerCookie.style.display = "block";
             }
         
@@ -24,7 +25,7 @@
               var cookieDate = new Date();
               cookieDate.setTime(new Date().getTime() + 2);
         
-              document.cookie = "dakitecCookieBanner = 1; path=/; secure; expires=" + cookieDate.toUTCString();
+              document.cookie = "score =" + "; expires=" + cookieDate.toUTCString();
         
               footerCookie.style.display = "none";
             };
@@ -33,9 +34,10 @@
             <h1>The Amazing Dig</h1>
         </header>
         <main>
-            <a href="map.html" target="_self"><button>Start a new Game</button></a>
+            <a href="map.html" target="_self"><button> Start a new Game</button></a>
             <button> Rules </button>
             <p>Best Score:</p>
+            <p id="score"></p>
         </main>
     </body>
 </html>

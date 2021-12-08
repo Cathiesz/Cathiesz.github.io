@@ -95,6 +95,10 @@ input {
     z-index: 1;
   }
 
+  #score {
+    background: green;
+  }
+
 /* The alert message box */
 .alert {
     padding: 20px;

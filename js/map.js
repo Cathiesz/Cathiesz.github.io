@@ -3,12 +3,13 @@ import './timer.js';
 var myGamePiece;
 var myObstacles = [];
 var myBoni = [];
-var myScore;
+var myScore = 0;
 
 // Defines the gaming area with the start, clear and stop functionality
+document.getElementById("score").innerHTML = myScore;
 
 var myGameArea = {
-  canvas : document.getElementById("#map"),
+  canvas : document.getElementById("map"),
   start : function() {
       this.canvas.width = 480;
       this.canvas.height = 270;
@@ -18,6 +19,7 @@ var myGameArea = {
       this.getBoni = 0;
       this.interval = setInterval(updateGameArea, 20);
       startTimer();
+      myScore = 0;
       },
   clear : function() {
       this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -70,7 +72,7 @@ function updateGameArea() {
     myBoni[i].update();
   }
 
-  myScore.text="SCORE: " + myGameArea.frameNo + myGameArea.getBoni;
+  myScore = myGameArea.frameNo + myGameArea.getBoni;
   myScore.update();
   myGamePiece.newPos();    
   myGamePiece.update();

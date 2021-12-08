@@ -1,7 +1,11 @@
+import './timer.js';
+
 var myGamePiece;
 var myObstacles = [];
+var myBoni = [];
 var myScore;
 
+// Defines the gaming area with the start, clear and stop functionality
 
 var myGameArea = {
   canvas : document.getElementById("#map"),
@@ -11,7 +15,9 @@ var myGameArea = {
       this.context = this.canvas.getContext("2d");
       document.body.insertBefore(this.canvas, document.body.childNodes[0]);
       this.frameNo = 0;
+      this.getBoni = 0;
       this.interval = setInterval(updateGameArea, 20);
+      startTimer();
       },
   clear : function() {
       this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -24,8 +30,8 @@ var myGameArea = {
 
 
 function startGame() {
-  myGamePiece = document.getElementById("#sensor");
-  myScore = new component("30px", "Consolas", "black", 280, 40, "text");
+  myGamePiece = new component("20px", "20px", "red", 10, 120);
+  myScore = new component("30px", "Console", "black", 280, 40, "text");
   myGameArea.start();
 }
 
@@ -48,15 +54,22 @@ function updateGameArea() {
       minGap = 50;
       maxGap = 200;
       gap = Math.floor(Math.random()*(maxGap-minGap+1)+minGap);
-      myObstacles.push(new component(10, height, "green", x, 0));
-      myObstacles.push(new component(10, x - height - gap, "green", x, height + gap));
+      myObstacles.push(new component(10, 10, "green", x, 0));
+      myObstacles.push(new component(10, 10, "green", Math.random() * 20, Math.random() * 20));
   }
   for (i = 0; i < myObstacles.length; i += 1) {
       myObstacles[i].speedX = -1;
       myObstacles[i].newPos();
       myObstacles[i].update();
   }
-  myScore.text="SCORE: " + myGameArea.frameNo;
+
+  for (i = 0; i < myBoni.length; i += 1) {
+    myBoni[i].speedX = -1;
+    myBoni[i].newPos();
+    myBoni[i].update();
+  }
+
+  myScore.text="SCORE: " + myGameArea.frameNo + myGameArea.getBoni;
   myScore.update();
   myGamePiece.newPos();    
   myGamePiece.update();

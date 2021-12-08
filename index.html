@@ -6,6 +6,29 @@
         <script src="https:://code.jquery.com/jquery-3.5.1.min.js"></script>
     </head>
     <body>
+        <div id="footer-cookie">
+            <span id="description">
+              Wir nutzen Cookies, um unsere Dienste zu erbringen und zu verbessern. Mit Nutzung dieser Seite akzeptieren Sie Cookies. <a href="https://dakitec.de/blog/cookie-banner-selbst-erstellen">Mehr erfahren</a>
+            </span>
+            <span id="accept"><a href="javascript:void(0)" title="Akzeptieren">Akzeptieren</a></span>
+        </div>
+        <script>
+            var footerCookie = document.querySelector("#footer-cookie");
+            var footerCookieAccept = document.querySelector("#accept");
+        
+            if (document.cookie.indexOf("dakitecCookieBanner=") == -1) {
+              footerCookie.style.display = "block";
+            }
+        
+            footerCookieAccept.onclick = function(e) {
+              var cookieDate = new Date();
+              cookieDate.setTime(new Date().getTime() + 2);
+        
+              document.cookie = "dakitecCookieBanner = 1; path=/; secure; expires=" + cookieDate.toUTCString();
+        
+              footerCookie.style.display = "none";
+            };
+        </script>
         <header>
             <h1>The Amazing Dig</h1>
         </header>

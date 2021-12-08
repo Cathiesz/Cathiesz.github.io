@@ -56,6 +56,7 @@ function updateGameArea() {
       gap = Math.floor(Math.random()*(maxGap-minGap+1)+minGap);
       myObstacles.push(new component(10, 10, "green", x, 0));
       myObstacles.push(new component(10, 10, "green", Math.random() * 20, Math.random() * 20));
+      myBoni.push(new component(10, 10, "blue", Math.random() * maxHeight, Math.random() * maxWidth))
   }
   for (i = 0; i < myObstacles.length; i += 1) {
       myObstacles[i].speedX = -1;

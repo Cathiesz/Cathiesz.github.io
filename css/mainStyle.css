@@ -50,8 +50,7 @@ button, a {
 }
 
 button:hover, a:hover {
-    font-size: 1.2rem;
-    color: chocolate;
+    color:rgb(128, 118, 118)
 }
 
 input {
@@ -183,6 +182,10 @@ input {
     text-decoration: none;
   }
 
+  #acceptbtn {
+    background-color: greenyellow;
+    color: #303030;
+  }
   @media (max-width: 1200px) {
     #footer-cookie {
       padding-top: 30px;

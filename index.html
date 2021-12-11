@@ -30,12 +30,59 @@
               footerCookie.style.display = "none";
             };
         </script>
+        <script>
+           const openModalButtons = document.querySelectorAll("[data-modal-target]");
+           const closeModalButtons = document.querySelectorAll("[data-modal-close]");
+           const overlay = document.getElementById("overlay")
+
+           openModalButtons.forEach(button => {
+               button.addEventListener("click", () => {
+                   const modal = document.querySelector(button.dataset.modalTarget)
+                   openModal(modal)
+               })
+           })
+
+           closeModalButtons.forEach(button => {
+               button.addEventListener("click", () => {
+                   const modal = button.closest(".modal");
+                   closeModal(modal)
+               })
+           })
+
+           function openModal(modal) {
+               if(modal == null) {
+                   return;
+               }
+               modal.classList.add("active");
+               overlay.classList.add("active");
+           }
+
+           function closeModal(modal) {
+               if(modal == null) {
+                   return;
+               }
+               modal.classList.remove("active");
+               overlay.classList.remove("active");
+           }
+        </script>
         <header>
             <h1>The Amazing Dig</h1>
         </header>
         <main>
             <a href="map.html" target="_self"><button> Start a new Game</button></a>
-            <button> Rules </button>
+            <button data-modal-target="#modal"> Rules </button>
+            <div class="modal" id="modal">
+                <div class="modal-header">
+                    <div class="modal-title">
+                        TITLE
+                    </div>
+                    <button data-close-button class="close-button">&times;</button>
+                    <div class="modal-body">
+                        test
+                    </div>
+                </div>
+                <div id="overlay"></div>
+            </div>
             <p>Best Score:</p>
             <p id="score"></p>
         </main>

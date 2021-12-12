@@ -72,6 +72,10 @@ input {
   border: thin solid #303030;
 }
 
+#gamePiece {
+  color: #000;
+}
+
 .dig {
   display: block;
   margin: 3rem;

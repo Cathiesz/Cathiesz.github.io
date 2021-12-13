@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <title>Map</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0"/>
     <link rel="stylesheet" type="text/css" href="./css/mainStyle.css">
     <script src="https:://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script type="text/javascript" src="./js/searchForTreasure.js"></script>
@@ -18,19 +18,22 @@
       var border;
       var diggingSite;
       var diggingAllowed = false;
+      var width = window.screen.width / 1.5;
+      var height = window.screen.height / 2;
+
 
     function startGame() {
         myGamePiece = new component(30, 30, "red", 10, 120, "player");
         myScore = new component("20px", "Score", "black", 0, 40, "text");
-        diggingSite = new component(20, 20, "black", Math.random() * 1200, Math.random() * 400);
+        diggingSite = new component(20, 20, "black", Math.random() * width, Math.random() * height);
         myGameArea.start();
     }
 
     var myGameArea = {
         canvas : Object.assign(document.createElement("canvas"),{id : "canvas"}),
         start : function() {
-            this.canvas.width = 1250;
-            this.canvas.height = 400;
+            this.canvas.width = width;
+            this.canvas.height = height;
             this.context = this.canvas.getContext("2d");
             document.body.insertBefore(this.canvas, document.body.childNodes[0]);
             this.frameNo = 0;
@@ -44,9 +47,8 @@
                 window.addEventListener('keyup', function (e) {
                     myGameArea.keys[e.keyCode] = (e.type == "keydown");
                 })
-            } else {
-                window.addEventListener("MozOrientation", handleOrientationEvent, true);
-                window.addEventListener("deviceorientation", handleOrientationEvent, true);
+            } else if(!window.DeviceOrientationEvent) {
+                window.addEventListener("deviceorientation", handleOrientationEvent);
             }
         },
         clear : function() {
@@ -139,14 +141,14 @@
             }
         }
 
-        if (myGamePiece.x > 1240 || myGamePiece.x < 0 || myGamePiece.y < 10 || myGamePiece.y > 400 ) {
+        if (myGamePiece.x > width - 10 || myGamePiece.x < 0 || myGamePiece.y < 10 || myGamePiece.y > height ) {
             myGameArea.stop();
         }
         myGameArea.clear();
         myGameArea.frameNo += 1;
         if (myGameArea.frameNo == 1 || everyinterval(100)) {
-            myObstacles.push(new component(10, 10, "green", Math.random() * 1200, Math.random() * 400));
-            myBoni.push(new component(10, 10, "blue", Math.random() * 1200, Math.random() * 400 ))
+            myObstacles.push(new component(10, 10, "green", Math.random() * width, Math.random() * height));
+            myBoni.push(new component(10, 10, "blue", Math.random() * width, Math.random() * height ))
         }
         for (i = 0; i < myObstacles.length; i += 1) {
             myObstacles[i].speedX = 0;
@@ -196,21 +198,23 @@
     var x = event.beta ? event.beta : event.y * 90;
     var y = event.gamma ? event.gamma : event.x * 90;
 
-    window.console && console.info('Raw position: x, y: ', x, y);
+    if (x >  90) { x =  90};
+    if (x < -90) { x = -90};
 
-    if (!initialX && !initialY) {
+    x += 90;
+    y += 90;
 
-        initialX = x;
-        initialY = y;
+    myGamePiece.moveUpDown = x / 100;
+    myGamePiece.moveLeftRight = y / 100;
 
-    } else {
+    myGamePiece.style.top = (height * x / 180 - 10) + "px";
+    myGamePiece.style.left = (width * x / 180 - 10) + "px";
+    }
 
-        myGamePiece.moveUpDown = initialX - x;
-        myGamePiece.moveLeftRight = initialY - y;
-
-        sensor.style.top = (90 + positionX * 5) + 'px';
-        sensor.style.left = (90 + positionY * 5) + 'px';
-        }
+    function dig(diggingSite) {
+        myScore.text="SCORE: " + myGameArea.frameNo * Math.exp(myGameArea.frameNo);
+        myGameArea.remove(diggingSite);
+        diggingSite = new component(10, 10, "black", Math.random() * width, Math.random() * height);
     }
 
     </script>

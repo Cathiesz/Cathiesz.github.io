@@ -47,9 +47,8 @@
                 window.addEventListener('keyup', function (e) {
                     myGameArea.keys[e.keyCode] = (e.type == "keydown");
                 })
-            } else if(!window.DeviceOrientationEvent) {
                 window.addEventListener("deviceorientation", handleOrientationEvent);
-            }
+            } 
         },
         clear : function() {
             this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -163,16 +162,20 @@
         }
 
         if (myGameArea.keys && myGameArea.keys[40]) {
-            myGamePiece.moveLeftRight = 1; 
+            myGamePiece.moveLeftRight = 1;
+            myGamePiece.moveUpDown= 0; 
         }
         if (myGameArea.keys && myGameArea.keys[38]) {
             myGamePiece.moveLeftRight = -1; 
+            myGamePiece.moveUpDown= 0;
         }
         if (myGameArea.keys && myGameArea.keys[37]) {
             myGamePiece.moveUpDown= -1; 
+            myGamePiece.moveLeftRight = 0;
         }
         if (myGameArea.keys && myGameArea.keys[39]) {
             myGamePiece.moveUpDown= 1; 
+            myGamePiece.moveLeftRight = 0;
         }
 
 
@@ -195,20 +198,40 @@
         
     function handleOrientationEvent(event) {
 
-    var x = event.beta ? event.beta : event.y * 90;
-    var y = event.gamma ? event.gamma : event.x * 90;
+        var x = event.beta ? event.beta : event.y * 90;
+        var y = event.gamma ? event.gamma : event.x * 90;
+        const lastx = 0;
+        const lasty = 0;
 
-    if (x >  90) { x =  90};
-    if (x < -90) { x = -90};
+        if (x >  90) { x =  90};
+        if (x < -90) { x = -90};
 
-    x += 90;
-    y += 90;
+        x += 90;
+        y += 90;
 
-    myGamePiece.moveUpDown = x / 100;
-    myGamePiece.moveLeftRight = y / 100;
+        if( x < lastx) {
+            myGamePiece.moveUpDown = -1;
+            myGamePiece.moveLeftRight = 0;
+            lastx = x;
+        }
 
-    myGamePiece.style.top = (height * x / 180 - 10) + "px";
-    myGamePiece.style.left = (width * x / 180 - 10) + "px";
+        if( x > lastx) {
+            myGamePiece.moveUpDown = 1;
+            myGamePiece.moveLeftRight = 0;
+            lastx = x;
+        }
+
+        if( y < lasty) {
+            myGamePiece.moveUpDown = 0; 
+            myGamePiece.moveLeftRight = -1;
+            lasty = y;
+        }
+
+        if( y > lasty) {
+            myGamePiece.moveUpDown = 0; 
+            myGamePiece.moveLeftRight = 1;
+            lasty = y;
+        }
     }
 
     function dig(diggingSite) {

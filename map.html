@@ -209,29 +209,8 @@
         x += 90;
         y += 90;
 
-        if( x < lastx) {
-            myGamePiece.moveUpDown = -1;
-            myGamePiece.moveLeftRight = 0;
-            lastx = x;
-        }
-
-        if( x > lastx) {
-            myGamePiece.moveUpDown = 1;
-            myGamePiece.moveLeftRight = 0;
-            lastx = x;
-        }
-
-        if( y < lasty) {
-            myGamePiece.moveUpDown = 0; 
-            myGamePiece.moveLeftRight = -1;
-            lasty = y;
-        }
-
-        if( y > lasty) {
-            myGamePiece.moveUpDown = 0; 
-            myGamePiece.moveLeftRight = 1;
-            lasty = y;
-        }
+        myGamePiece.moveUpDown = x / 500;
+        myGamePiece.moveLeftRight = y / 500;
     }
 
     function dig(diggingSite) {

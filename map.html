@@ -20,6 +20,8 @@
       var diggingAllowed = false;
       var width = window.screen.width / 1.5;
       var height = window.screen.height / 2;
+      var initialX = null;
+      var initialY = null;
 
 
     function startGame() {
@@ -47,7 +49,7 @@
                 window.addEventListener('keyup', function (e) {
                     myGameArea.keys[e.keyCode] = (e.type == "keydown");
                 })
-                window.addEventListener("deviceorientation", handleOrientationEvent);
+                window.addEventListener("deviceorientation", handleOrientationEvent, true);
             } 
         },
         clear : function() {
@@ -200,17 +202,20 @@
 
         var x = event.beta ? event.beta : event.y * 90;
         var y = event.gamma ? event.gamma : event.x * 90;
-        const lastx = 0;
-        const lasty = 0;
 
-        if (x >  90) { x =  90};
-        if (x < -90) { x = -90};
+        if (!initialX && !initialY) {
 
-        x += 90;
-        y += 90;
+            initialX = x;
+            initialY = y;
 
-        myGamePiece.moveUpDown = x / 500;
-        myGamePiece.moveLeftRight = y / 500;
+        } else {
+
+            var positionX = initialX - x;
+            var positionY = initialY - y;
+
+            myGamePiece.moveUpDown = (90 + positionX * 5);
+            myGamePiece.moveLeftRight = (90 + positionY * 5);
+        }
     }
 
     function dig(diggingSite) {

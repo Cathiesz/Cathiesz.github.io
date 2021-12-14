@@ -197,4 +197,7 @@ var myGamePiece;
             myGamePiece.moveUpDown = 1;
             myGamePiece.moveLeftRight = 0;
         }
+        var logel = document.querySelector('.logel');
+        logel.innerHTML = position.coords.speed;
+        logel.innerHTML = position.coords.heading;
     }

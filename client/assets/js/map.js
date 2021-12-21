@@ -9,7 +9,7 @@ var myGamePiece;
       var height = window.screen.height / 2;
 
     function startGame() {
-        myGamePiece = new component(30, 30, "red", 10, 120, "player");
+        myGamePiece = new component(30, 30, "red", width / 2 , height / 2, "player");
         myScore = new component("20px", "Score", "black", 0, 40, "text");
         diggingSite = new component(20, 20, "black", Math.random() * width, Math.random() * height);
         myGameArea.start();
@@ -24,7 +24,7 @@ var myGamePiece;
             document.body.insertBefore(this.canvas, document.body.childNodes[0]);
             this.frameNo = 0;
             this.interval = setInterval(updateGameArea, 20);
-            if(window.DeviceOrientationEvent){
+            if(!window.DeviceOrientationEvent){
                 window.addEventListener('keydown', function (e) {
                     e.preventDefault();
                     myGameArea.keys = (myGameArea.keys || []);
@@ -32,6 +32,26 @@ var myGamePiece;
                 })
                 window.addEventListener('keyup', function (e) {
                     myGameArea.keys[e.keyCode] = (e.type == "keydown");
+                })
+            } else if(window.DeviceOrientationEvent) {
+                window.addEventListener('deviceorientation', function(event) {
+                    var a = event.alpha; // "direction"
+                    var b = event.beta; // left/right 'tilt'
+                    var g = event.gamma; // forward/back 'tilt
+                    
+                    console.log('alpha : ${a}\n');
+                    console.log('beta : ${b}\n');
+                    console.log('gamma : ${g}\n');
+                    // Regardless of phone direction, 
+                    //  left/right tilt should behave the same
+                    myGamePiece.moveLeftRight = b;
+                    myGamePiece.moveUpDown = g;
+                    if( a > 270 || a < 90 ) {
+                       myGamePiece.moveLeftRight = 0 - b;
+                    }
+                    else {
+                       myGamePiece.moveUpDown = 0 - g;
+                    }
                 })
             } else {
                 navigator.geolocation.watchPosition((data) => {
@@ -190,14 +210,4 @@ var myGamePiece;
         myScore.text="SCORE: " + myGameArea.frameNo * Math.exp(myGameArea.frameNo);
         myGameArea.remove(diggingSite);
         diggingSite = new component(10, 10, "black", Math.random() * width, Math.random() * height);
-    }
-
-    function movement(position) {
-        if(position.coords.speed > 0 && position.coords.heading > 0 && position.coords.heading < 180) {
-            myGamePiece.moveUpDown = 1;
-            myGamePiece.moveLeftRight = 0;
-        }
-        var logel = document.querySelector('.logel');
-        logel.innerHTML = position.coords.speed;
-        logel.innerHTML = position.coords.heading;
     }

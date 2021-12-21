@@ -1,5 +1,6 @@
 :root {
     background-color: rgb(213, 245, 165);
+    overflow-x: hidden;
 }
 
 #background {
@@ -25,7 +26,7 @@ main {
     text-align: center;
 }
 
-h1, h2 { 
+h1 { 
     font-size: 1.8rem; 
     font-style: italic;
     text-align: center;
@@ -33,18 +34,18 @@ h1, h2 {
     margin-top: 6rem;
 }
 
-h3 {
-    font-size: 1.8rem; 
-    font-style: italic;
-    text-align: center;
-}
-
-p {
-    font-size: 1rem; 
+h2 {
+  font-size: 1.8rem; 
     font-style: italic;
     text-align: center;
     margin-bottom: 1rem;
     margin-top: 1rem;
+}
+
+h3 {
+    font-size: 1.8rem; 
+    font-style: italic;
+    text-align: center;
 }
 
 button, a {
@@ -292,7 +293,8 @@ button:hover, a:hover {
   -webkit-animation-name: animatetop;
   -webkit-animation-duration: 0.4s;
   animation-name: animatetop;
-  animation-duration: 0.4s
+  animation-duration: 0.4s;
+  overflow-y: auto;
 }
 
 /* Add Animation */
@@ -322,15 +324,9 @@ button:hover, a:hover {
 }
 
 .modal-header {
-  padding: 2px 16px;
+  padding: 2px 1px;
   background-color: #5cb85c;
   color: white;
 }
 
 .modal-body {padding: 2px 16px;}
-
-.modal-footer {
-  padding: 2px 16px;
-  background-color: #5cb85c;
-  color: white;
-}

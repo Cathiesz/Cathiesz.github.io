@@ -3,7 +3,7 @@ var myGamePiece;
       var myBoni = [];
       var myScore;
       var border;
-      var diggingSite;
+      var diggingSite = [];
       var diggingAllowed = false;
       var width = window.screen.width / 1.5;
       var height = window.screen.height / 2;
@@ -11,7 +11,6 @@ var myGamePiece;
     function startGame() {
         myGamePiece = new component(30, 30, "red", width / 2 , height / 2, "player");
         myScore = new component("20px", "Score", "black", 0, 40, "text");
-        diggingSite = new component(20, 20, "black", Math.random() * width, Math.random() * height);
         myGameArea.start();
     }
 
@@ -171,9 +170,14 @@ var myGamePiece;
         myGameArea.clear();
         myGameArea.frameNo += 1;
         if (myGameArea.frameNo == 1 || everyinterval(100)) {
-            myObstacles.push(new component(10, 10, "green", Math.random() * width, Math.random() * height));
-            myBoni.push(new component(10, 10, "blue", Math.random() * width, Math.random() * height ))
+            myObstacles.push(new component(10, 10, "green", Math.random() * width - 10, Math.random() * height - 10));
+            myBoni.push(new component(10, 10, "blue", Math.random() * width - 10 , Math.random() * height - 10))
         }
+
+        if (myGameArea.frameNo == 10) {
+            diggingSite.push(new component(10, 10, "black", Math.random() * width - 10, Math.random() * height - 10));
+        }
+
         for (i = 0; i < myObstacles.length; i += 1) {
             myObstacles[i].speedX = 0;
             myObstacles[i].newPos();
@@ -184,6 +188,12 @@ var myGamePiece;
             myBoni[i].speedX = 0;
             myBoni[i].newPos();
             myBoni[i].update();
+        }
+
+        for (i = 0; i < diggingSite.length; i += 1) {
+            diggingSite[i].speedX = 0;
+            diggingSite[i].newPos();
+            diggingSite[i].update();
         }
 
         if (myGameArea.keys && myGameArea.keys[40]) {
@@ -223,5 +233,6 @@ var myGamePiece;
     function dig(diggingSite) {
         myScore.text="SCORE: " + myGameArea.frameNo * Math.exp(myGameArea.frameNo);
         myGameArea.remove(diggingSite);
-        diggingSite = new component(10, 10, "black", Math.random() * width, Math.random() * height);
+        diggingSite.push(new component(10, 10, "black", Math.random() * width, Math.random() * height));
+        diggingSite.update();
     }

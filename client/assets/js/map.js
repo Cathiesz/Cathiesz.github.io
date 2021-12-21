@@ -24,7 +24,7 @@ var myGamePiece;
             document.body.insertBefore(this.canvas, document.body.childNodes[0]);
             this.frameNo = 0;
             this.interval = setInterval(updateGameArea, 20);
-            if(!window.DeviceOrientationEvent){
+            if(window.DeviceOrientationEvent){
                 window.addEventListener('keydown', function (e) {
                     e.preventDefault();
                     myGameArea.keys = (myGameArea.keys || []);
@@ -47,10 +47,10 @@ var myGamePiece;
                     myGamePiece.moveLeftRight = b;
                     myGamePiece.moveUpDown = g;
                     if( a > 270 || a < 90 ) {
-                       myGamePiece.moveLeftRight = 0 - b;
+                       myGamePiece.moveLeftRight = 0 - b / 100;
                     }
                     else {
-                       myGamePiece.moveUpDown = 0 - g;
+                       myGamePiece.moveUpDown = 0 - g / 100;
                     }
                 })
             } else {

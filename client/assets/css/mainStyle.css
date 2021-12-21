@@ -287,3 +287,15 @@ button:hover, a:hover {
     opacity: 1;
     pointer-events: all;
   }
+
+  /*----------------------------------------------------------------*/
+
+  .pids-wrapper{
+    width: 100%;
+  }
+  .pid{
+    width: calc(10% - 10px);
+    height: 10px;
+    display: inline-block;
+    margin: 5px;
+  }

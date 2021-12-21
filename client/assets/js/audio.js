@@ -36,7 +36,7 @@ function getLocalStream() {
     .catch(function(err) {
         /* handle the error */
         console.log("u got an error:" + err);
-        alert("U got an error:" + err);
+        alert("We need your permission to use this feature in order to play a game with you");
     });
 }
 
@@ -57,4 +57,3 @@ function colorPids(vol) {
 function volumeTreshold(vol) {
 
 }
-getLocalStream();

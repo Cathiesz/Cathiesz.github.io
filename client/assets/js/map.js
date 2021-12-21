@@ -33,7 +33,6 @@ var myGamePiece;
                 window.addEventListener('keyup', function (e) {
                     myGameArea.keys[e.keyCode] = (e.type == "keydown");
                 })
-            } else if(window.DeviceOrientationEvent) {
                 window.addEventListener('deviceorientation', function(event) {
                     var a = event.alpha; // "direction"
                     var b = event.beta; // left/right 'tilt'
@@ -44,21 +43,36 @@ var myGamePiece;
                     console.log('gamma : ${g}\n');
                     // Regardless of phone direction, 
                     //  left/right tilt should behave the same
-                    myGamePiece.moveLeftRight = b;
-                    myGamePiece.moveUpDown = g;
+                    //myGamePiece.moveLeftRight = b;
+                    //myGamePiece.moveUpDown = g;
+
                     if( a > 270 || a < 90 ) {
-                       myGamePiece.moveLeftRight = 0 - b / 100;
+                        if (0 - b > 0) {
+                            myGamePiece.moveUpDown = 1;
+                            myGamePiece.moveLeftRight = 0;
+                        }
+                        else {
+                            myGamePiece.moveUpDown = - 1; 
+                            myGamePiece.moveLeftRight = 0;
+                        }                  
+                       
+                        //myGamePiece.moveLeftRight = 0 - b / 1000;  
                     }
                     else {
-                       myGamePiece.moveUpDown = 0 - g / 100;
+                        if (0 - g > 0) {
+                            myGamePiece.moveLeftRight = 1;
+                            myGamePiece.moveUpDown = 0;
+                        }
+                        else {
+                            myGamePiece.moveLeftRight = - 1;
+                            myGamePiece.moveUpDown = 0;
+                        }
+                        
+                       //myGamePiece.moveUpDown = 0 - g / 1000;
                     }
+
+                    console.log(myGamePiece.moveLeftRight, myGamePiece.moveUpDown);
                 })
-            } else {
-                navigator.geolocation.watchPosition((data) => {
-                    movement(data);
-                }, (err) => {
-                    alert(err);
-                });
             }
         },
         clear : function() {

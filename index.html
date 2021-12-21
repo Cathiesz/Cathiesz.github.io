@@ -6,103 +6,66 @@
         <script src="https:://code.jquery.com/jquery-3.5.1.min.js"></script>
         <script type="text/javascript" src="./client/assets/js/map.js"></script>
         <script type="text/javascript" src="./client/assets/js/audio.js" async></script>
+        <script type="text/javascript" src="./client/assets/js/modal.js"></script>
     </head>
     <body onload="getLocalStream()">
-        <div id="footer-cookie">
-            <span id="description">
-              We use Cookies to safe your score for you.
-            </span>
-            <span id="accept"><a id="acceptbtn" href="javascript:void(0)" title="Accept">Accept</a></span>
-        </div>
-        <script>
-            var footerCookie = document.querySelector("#footer-cookie");
-            var footerCookieAccept = document.querySelector("#accept");
-        
-            if (document.cookie.indexOf("score=") == 0) {
-              footerCookie.style.display = "block";
-            }
-        
-            footerCookieAccept.onclick = function(e) {
-              var cookieDate = new Date();
-              cookieDate.setTime(new Date().getTime() + 2);
-        
-              document.cookie = "score =" + "; expires=" + cookieDate.toUTCString();
-        
-              footerCookie.style.display = "none";
-            };
-        </script>
-        <script>
-           const openModalButtons = document.querySelectorAll("[data-modal-target]");
-           const closeModalButtons = document.querySelectorAll("[data-modal-close]");
-           const overlay = document.getElementById("overlay")
-
-           openModalButtons.forEach(button => {
-               button.addEventListener("click", () => {
-                   const modal = document.querySelector(button.dataset.modalTarget)
-                   openModal(modal)
-               })
-           })
-
-           closeModalButtons.forEach(button => {
-               button.addEventListener("click", () => {
-                   const modal = button.closest(".modal");
-                   closeModal(modal)
-               })
-           })
-
-           function openModal(modal) {
-               if(modal == null) {
-                   return;
-               }
-               modal.classList.add("active");
-               overlay.classList.add("active");
-           }
-
-           function closeModal(modal) {
-               if(modal == null) {
-                   return;
-               }
-               modal.classList.remove("active");
-               overlay.classList.remove("active");
-           }
-        </script>
         <header>
             <h1>The Amazing Dig</h1>
         </header>
         <main>
-            <a href="map.html" target="_self"><button> Start a new Game</button></a>
-            <button data-modal-target="#modal"> Rules </button>
-            <div class="modal" id="modal">
-                <div class="modal-header">
-                    <div class="modal-title">
-                        Rules for "The Amazing Dig!"
+            <div className="background" id="background">
+                <a href="map.html" target="_self"><button> Start a new Game</button></a>
+               <!-- Trigger/Open The Modal -->
+                <button id="myBtn">Rules</button>
+
+                <!-- The Modal -->
+                <div id="myModal" class="modal">
+
+                <!-- Modal content -->
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <span class="close">&times;</span>
+                    <h2>Rules</h2>
                     </div>
-                    <button data-close-button class="close-button">&times;</button>
                     <div class="modal-body">
-                        The Amazing Dig! is a snake inspired Web-App Game that is playable on Mobile and PC <br/>
-                        <h5> 
-                            Rules
-                        </h5>
-                        <p>Once the game has started u will see random squares poping up on your screen. By moving your Meeple you have to get to the X 
-                            on your screen and press the Dig button to get a Treasure (Score points go yeeee). But attention. If you hit a <p style="color: green"> Square </p>
-                            the game will end. If you hit a <p style="color: blue"> Square </p> some random <p style="color: green"> Squares </p> will disappear from your Map.
-                        </p>
-                        <h5>
-                            Movement PC
-                        </h5>
-                        <p> On the PC you can move your Meeple by using the arrow keys.</p>
-                        <h5>
-                            Movement Mobile
-                        </h5>
-                        <p>
-                            On Mobile you can move your Meeple by tilting your Phone.
-                        </p>
+                    <p>This game has been inspired by the classic Snake.
+                        In this digging adventure you control the Meeple on his adventure to find as
+                        many treasure as possible.
+                    </p>
+                    <p>Some other text...</p>
                     </div>
                 </div>
-                <div id="overlay"></div>
+                </div>
+            <div id="overlay"></div>
             </div>
-            <p>Best Score:</p>
-            <p id="score"></p>
         </main>
+        <script>
+            // Get the modal
+            var modal = document.getElementById("myModal");
+            
+            // Get the button that opens the modal
+            var btn = document.getElementById("myBtn");
+            
+            // Get the <span> element that closes the modal
+            var span = document.getElementsByClassName("close")[0];
+            
+            // When the user clicks the button, open the modal 
+            btn.onclick = function() {
+              modal.style.display = "block";
+            }
+            
+            // When the user clicks on <span> (x), close the modal
+            span.onclick = function() {
+              modal.style.display = "none";
+            }
+            
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function(event) {
+              if (event.target == modal) {
+                modal.style.display = "none";
+              }
+            }
+            </script>
+            
     </body>
 </html>

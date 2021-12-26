@@ -3,6 +3,11 @@
     overflow-x: hidden;
 }
 
+html, body { 
+  overflow: hidden;
+  background: url("map.jpg");
+}
+
 #background {
   border: 1px solid rgb(22,22,22);
   text-align: center;
@@ -253,17 +258,14 @@ button:hover, a:hover {
   }
 
   /*----------------------------------------------------------------*/
-
-  .pids-wrapper{
-    width: 100%;
+  #volume-show {
+    width: 150px;
+    height: 100px;
+    position: absolute;
+    top: 150px;
+    left: 45%;
+    text-align: center;
   }
-  .pid{
-    width: calc(10% - 10px);
-    height: 10px;
-    display: inline-block;
-    margin: 5px;
-  }
-
   /*----------------------------------------------------------------*/
 
 /* The Modal (background) */
@@ -330,3 +332,17 @@ button:hover, a:hover {
 }
 
 .modal-body {padding: 2px 16px;}
+
+.lost-screen, #lost-screen {
+  text-align: center;
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
+.container {
+  background-color: white;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  margin-top: 2rem;
+  padding-bottom: 80%;
+}

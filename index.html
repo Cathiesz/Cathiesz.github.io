@@ -3,6 +3,7 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="./client/assets/css/mainStyle.css">
+        <link rel="stylesheet" type="text/css" href="./client/assets/css/pixelart.css">
         <script src="https:://code.jquery.com/jquery-3.5.1.min.js"></script>
         <script type="text/javascript" src="./client/assets/js/map.js"></script>
         <script type="text/javascript" src="./client/assets/js/audio.js" async></script>
@@ -13,8 +14,12 @@
             <h1>The Amazing Dig</h1>
         </header>
         <main>
+            <div class="pixelart-to-css"></div>
+            <br />
+            <br />
             <div className="background" id="background">
                 <a href="map.html" target="_self"><button> Start a new Game</button></a>
+                
                <!-- Trigger/Open The Modal -->
                 <button id="myBtn">Rules</button>
 
@@ -68,6 +73,7 @@
                 </div>
             <div id="overlay"></div>
             </div>
+            
         </main>
         <script>
             // Get the modal

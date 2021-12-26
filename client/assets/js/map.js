@@ -1,4 +1,5 @@
 var myGamePiece;
+      var audio = new Audio('audio_file.mp3');
       var myObstacles = [];
       var myBoni = [];
       var myScore;
@@ -79,6 +80,7 @@ var myGamePiece;
         },
         stop : function() {
             clearInterval(this.interval);
+            window.open("lost.html","_self");
         }
     }
 
@@ -151,6 +153,8 @@ var myGamePiece;
         for (i = 0; i < myObstacles.length; i ++) {
             if (myGamePiece.crashWith(myObstacles[i])) {
                 myGameArea.stop();
+                var s = document.getElementById("#end-score");
+                s.value = myScore;
                 return;
             } 
         }
@@ -160,12 +164,16 @@ var myGamePiece;
                 myScore.text="SCORE: " + myGameArea.frameNo * 3;
                 myBoni[i].remove(i);
                 myScore.update();
+                audio.play();
                 return;
             }
         }
 
         if (myGamePiece.x > width - 10 || myGamePiece.x < 0 || myGamePiece.y < 10 || myGamePiece.y > height ) {
             myGameArea.stop();
+            var s = document.getElementById("end-score");
+            s.value = myScore;
+            $('#end-modal').modal('show');
         }
         myGameArea.clear();
         myGameArea.frameNo += 1;
@@ -231,8 +239,10 @@ var myGamePiece;
     }
 
     function dig(diggingSite) {
-        myScore.text="SCORE: " + myGameArea.frameNo * Math.exp(myGameArea.frameNo);
-        myGameArea.remove(diggingSite);
-        diggingSite.push(new component(10, 10, "black", Math.random() * width, Math.random() * height));
-        diggingSite.update();
+        if(getLocalStream() >= 50) {
+            myScore.text="SCORE: " + myGameArea.frameNo * Math.exp(myGameArea.frameNo);
+            myGameArea.remove(diggingSite);
+            diggingSite.push(new component(10, 10, "black", Math.random() * width, Math.random() * height));
+            diggingSite.update();
+        }
     }

@@ -1,5 +1,6 @@
 :root {
     background-color: rgb(213, 245, 165);
+    background-image: url('map.jpg');
     overflow-x: hidden;
 }
 

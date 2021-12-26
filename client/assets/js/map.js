@@ -1,5 +1,4 @@
 var myGamePiece;
-      var audio = new Audio('audio_file.mp3');
       var myObstacles = [];
       var myBoni = [];
       var myScore;
@@ -164,7 +163,6 @@ var myGamePiece;
                 myScore.text="SCORE: " + myGameArea.frameNo * 3;
                 myBoni[i].remove(i);
                 myScore.update();
-                audio.play();
                 return;
             }
         }

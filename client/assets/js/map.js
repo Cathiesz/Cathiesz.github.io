@@ -170,8 +170,7 @@ var myGamePiece;
         if (myGamePiece.x > width - 10 || myGamePiece.x < 0 || myGamePiece.y < 10 || myGamePiece.y > height ) {
             myGameArea.stop();
             var s = document.getElementById("end-score");
-            s.value = myScore;
-            $('#end-modal').modal('show');
+            s.value = myScore.text;
         }
         myGameArea.clear();
         myGameArea.frameNo += 1;
@@ -237,10 +236,8 @@ var myGamePiece;
     }
 
     function dig(diggingSite) {
-        if(getLocalStream() >= 50) {
             myScore.text="SCORE: " + myGameArea.frameNo * Math.exp(myGameArea.frameNo);
             myGameArea.remove(diggingSite);
             diggingSite.push(new component(10, 10, "black", Math.random() * width, Math.random() * height));
             diggingSite.update();
-        }
     }

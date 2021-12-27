@@ -46,11 +46,11 @@ var myGamePiece;
                     //myGamePiece.moveUpDown = g;
 
                     if( a > 270 || a < 90 ) {
-                        if (0 - b > 0) {
+                        if (g > 30) {
                             myGamePiece.moveUpDown = 1;
                             myGamePiece.moveLeftRight = 0;
                         }
-                        else {
+                        else if (g < -30){
                             myGamePiece.moveUpDown = - 1; 
                             myGamePiece.moveLeftRight = 0;
                         }                  
@@ -58,11 +58,11 @@ var myGamePiece;
                         //myGamePiece.moveLeftRight = 0 - b / 1000;  
                     }
                     else {
-                        if (0 - g > 0) {
+                        if (b < 60) {
                             myGamePiece.moveLeftRight = 1;
                             myGamePiece.moveUpDown = 0;
                         }
-                        else {
+                        else if (b > 100) {
                             myGamePiece.moveLeftRight = - 1;
                             myGamePiece.moveUpDown = 0;
                         }

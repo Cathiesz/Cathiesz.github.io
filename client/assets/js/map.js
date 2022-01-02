@@ -100,6 +100,9 @@ var myGamePiece;
                 ctx.font = this.width + " " + this.height;
                 ctx.fillStyle = color;
                 ctx.fillText(this.text, this.x, this.y);
+            } else if(this.type == "player") {
+                ctx.fillStyle = color;
+                ctx.fillRect(this.x, this.y, this.width, this.height);  
             } else {
                 ctx.fillStyle = color;
                 ctx.fillRect(this.x, this.y, this.width, this.height);  
@@ -152,36 +155,35 @@ var myGamePiece;
         for (i = 0; i < myObstacles.length; i ++) {
             if (myGamePiece.crashWith(myObstacles[i])) {
                 myGameArea.stop();
-                var s = document.getElementById("#end-score");
-                s.value = myScore;
-                return;
             } 
         }
 
         for (i = 0; i < myBoni.length; i++) {
             if (myGamePiece.crashWith(myBoni[i])) {
-                myScore.text="SCORE: " + myGameArea.frameNo * 3;
-                myBoni[i].remove(i);
+                myScore.text="SCORE: " + myGameArea.frameNo * 10;
                 myScore.update();
+                myBoni[i].remove(i);
                 return;
             }
         }
 
         if (myGamePiece.x > width - 10 || myGamePiece.x < 0 || myGamePiece.y < 10 || myGamePiece.y > height ) {
-            myGameArea.stop();
-            var s = document.getElementById("end-score");
-            s.value = myScore.text;
+                myGameArea.stop();
+
         }
         myGameArea.clear();
         myGameArea.frameNo += 1;
         if (myGameArea.frameNo == 1 || everyinterval(100)) {
             myObstacles.push(new component(10, 10, "green", Math.random() * width - 10, Math.random() * height - 10));
-            myBoni.push(new component(10, 10, "blue", Math.random() * width - 10 , Math.random() * height - 10))
+            var cross = new component(10, 10, "black", Math.random() * width - 10 , Math.random() * height - 10);
+            myBoni.push(cross);
         }
 
+        /*
         if (myGameArea.frameNo == 10) {
             diggingSite.push(new component(10, 10, "black", Math.random() * width - 10, Math.random() * height - 10));
         }
+        */
 
         for (i = 0; i < myObstacles.length; i += 1) {
             myObstacles[i].speedX = 0;
@@ -240,4 +242,11 @@ var myGamePiece;
             myGameArea.remove(diggingSite);
             diggingSite.push(new component(10, 10, "black", Math.random() * width, Math.random() * height));
             diggingSite.update();
+    }
+
+    function returnScore() {
+        window.onload = function() {
+          var s = document.getElementById("end-score");
+          s.innerHTML = myScore.text;
+        }
     }

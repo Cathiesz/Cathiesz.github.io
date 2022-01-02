@@ -74,7 +74,7 @@ button:hover, a:hover {
     margin-top: 5%;
     margin-left: 15%;
     text-align: center;
-    background-color: #fff;
+    background-color: rgb(243, 240, 240, 0.5);
     border: thin solid #303030;
     width: fit-content;
     height: fit-content;
@@ -101,7 +101,7 @@ button:hover, a:hover {
   margin-top: 10%;
   margin-left: 15%;
   text-align: center;
-  background-color: #fff;
+  background-color: rgb(243, 240, 240, 0.5);
   border: thin solid #303030;
   width: fit-content;
   height: fit-content;
@@ -345,4 +345,34 @@ button:hover, a:hover {
   margin-right: 2rem;
   margin-top: 2rem;
   padding-bottom: 80%;
+}
+
+/* -------------------------------- */
+#cross {
+  width: 100px;
+  height: 100px;
+  position: relative;
+ transform:rotate(45deg);
+-ms-transform:rotate(45deg); /* IE 9 */
+-webkit-transform:rotate(45deg); /* Safari and Chrome */
+}
+
+#cross:before, #cross:after {
+ content: "";
+ position: absolute;
+ z-index: -1;
+}
+
+#cross:before {
+ left: 50%;
+ width: 30%;
+ margin-left: -15%;
+ height: 100%;
+}
+
+#cross:after {
+ top: 50%;
+ height: 30%;
+ margin-top: -15%;
+ width: 100%;
 }

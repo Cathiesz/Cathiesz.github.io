@@ -8,10 +8,19 @@
         <script type="text/javascript" src="./client/assets/js/map.js"></script>
         <script type="text/javascript" src="./client/assets/js/audio.js" async></script>
         <script type="text/javascript" src="./client/assets/js/modal.js"></script>
+        <style type="text/css">
+            @font-face {
+                font-family: "Pirates Font";
+                src: url(client\assets\fonts\BattlesbridgeDemo-AL126.ttf) format("truetype");
+            }
+            p.customfont { 
+                font-family: "Pirates Font", Verdana, Tahoma;
+            }
+            </style>
     </head>
     <body onload="getLocalStream()">
         <header>
-            <h1>The Amazing Dig</h1>
+            <h1 class="customfont">The Amazing Dig</h1>
         </header>
         <main>
             <div class="pixelart-to-css"></div>

@@ -9,7 +9,7 @@ var myGamePiece;
       var height = window.screen.height / 2;
 
     function startGame() {
-        myGamePiece = new component(30, 30, "red", width / 2 , height / 2, "player");
+        myGamePiece = new component(30, 30, "black", width / 2 , height / 2, "player");
         myScore = new component("20px", "Score", "black", 0, 40, "text");
         myGameArea.start();
     }
@@ -47,11 +47,11 @@ var myGamePiece;
 
                     if( a > 270 || a < 90 ) {
                         if (g > 30) {
-                            myGamePiece.moveUpDown = 1;
+                            myGamePiece.moveUpDown = -2;
                             myGamePiece.moveLeftRight = 0;
                         }
                         else if (g < -30){
-                            myGamePiece.moveUpDown = - 1; 
+                            myGamePiece.moveUpDown =2; 
                             myGamePiece.moveLeftRight = 0;
                         }                  
                        
@@ -59,11 +59,11 @@ var myGamePiece;
                     }
                     else {
                         if (b < 60) {
-                            myGamePiece.moveLeftRight = 1;
+                            myGamePiece.moveLeftRight =2;
                             myGamePiece.moveUpDown = 0;
                         }
                         else if (b > 100) {
-                            myGamePiece.moveLeftRight = - 1;
+                            myGamePiece.moveLeftRight = -2;
                             myGamePiece.moveUpDown = 0;
                         }
                         
@@ -174,8 +174,8 @@ var myGamePiece;
         myGameArea.clear();
         myGameArea.frameNo += 1;
         if (myGameArea.frameNo == 1 || everyinterval(100)) {
-            myObstacles.push(new component(10, 10, "green", Math.random() * width - 10, Math.random() * height - 10));
-            var cross = new component(10, 10, "black", Math.random() * width - 10 , Math.random() * height - 10);
+            myObstacles.push(new component(10, 10, "red", Math.random() * width - 10, Math.random() * height - 10));
+            var cross = new component(10, 10, "green", Math.random() * width - 10 , Math.random() * height - 10);
             myBoni.push(cross);
         }
 
@@ -204,19 +204,19 @@ var myGamePiece;
         }
 
         if (myGameArea.keys && myGameArea.keys[40]) {
-            myGamePiece.moveLeftRight = 1;
+            myGamePiece.moveLeftRight =2;
             myGamePiece.moveUpDown= 0; 
         }
         if (myGameArea.keys && myGameArea.keys[38]) {
-            myGamePiece.moveLeftRight = -1; 
+            myGamePiece.moveLeftRight =-2; 
             myGamePiece.moveUpDown= 0;
         }
         if (myGameArea.keys && myGameArea.keys[37]) {
-            myGamePiece.moveUpDown= -1; 
+            myGamePiece.moveUpDown=-2; 
             myGamePiece.moveLeftRight = 0;
         }
         if (myGameArea.keys && myGameArea.keys[39]) {
-            myGamePiece.moveUpDown= 1; 
+            myGamePiece.moveUpDown=2; 
             myGamePiece.moveLeftRight = 0;
         }
 

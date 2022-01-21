@@ -2,6 +2,8 @@ var myGamePiece;
       var myObstacles = [];
       var myBoni = [];
       var myScore;
+      var endscore = 0;
+      var endScore;
       var border;
       var diggingSite = [];
       var diggingAllowed = false;
@@ -78,6 +80,8 @@ var myGamePiece;
             this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
         },
         stop : function() {
+            endscore = myGameArea.frameNo;
+            localStorage.setItem("endscore", endscore);
             clearInterval(this.interval);
             window.open("lost.html","_self");
         }
@@ -161,6 +165,7 @@ var myGamePiece;
         for (i = 0; i < myBoni.length; i++) {
             if (myGamePiece.crashWith(myBoni[i])) {
                 myScore.text="SCORE: " + myGameArea.frameNo * 10;
+                endscore = myGameArea.frameNo * 10;
                 myScore.update();
                 myBoni[i].remove(i);
                 return;
@@ -178,12 +183,6 @@ var myGamePiece;
             var cross = new component(10, 10, "green", Math.random() * width - 10 , Math.random() * height - 10);
             myBoni.push(cross);
         }
-
-        /*
-        if (myGameArea.frameNo == 10) {
-            diggingSite.push(new component(10, 10, "black", Math.random() * width - 10, Math.random() * height - 10));
-        }
-        */
 
         for (i = 0; i < myObstacles.length; i += 1) {
             myObstacles[i].speedX = 0;
@@ -220,8 +219,10 @@ var myGamePiece;
             myGamePiece.moveLeftRight = 0;
         }
 
-
-        myScore.text="SCORE: " + myGameArea.frameNo;
+        endscore = myGameArea.frameNo;
+        console.log(endscore);
+        myScore.text="SCORE: " + endscore;
+        
         myScore.update();
         myGamePiece.newPos();    
         myGamePiece.update();
@@ -237,16 +238,6 @@ var myGamePiece;
         myGamePiece.speedY = 0; 
     }
 
-    function dig(diggingSite) {
-            myScore.text="SCORE: " + myGameArea.frameNo * Math.exp(myGameArea.frameNo);
-            myGameArea.remove(diggingSite);
-            diggingSite.push(new component(10, 10, "black", Math.random() * width, Math.random() * height));
-            diggingSite.update();
-    }
+    let returnScore = () => {console.log(endscore)};
 
-    function returnScore() {
-        window.onload = function() {
-          var s = document.getElementById("end-score");
-          s.innerHTML = myScore.text;
-        }
-    }
+    returnScore();

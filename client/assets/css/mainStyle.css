@@ -333,12 +333,17 @@ button:hover, a:hover {
 
 .modal-body {padding: 2px 16px;}
 
-.lost-screen, #lost-screen {
+.lost-screen, #lost-screen, .end-score {
   text-align: center;
   margin-left: 2rem;
   margin-right: 2rem;
 }
 
+.end-score {
+  font-weight: bold;
+  margin-top: 3rem;
+  font-size:2rem;
+}
 .container {
   background-color: white;
   margin-left: 2rem;

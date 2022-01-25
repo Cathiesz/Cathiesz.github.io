@@ -9,6 +9,7 @@ var myGamePiece;
       var diggingAllowed = false;
       var width = window.screen.width / 1.5;
       var height = window.screen.height / 2;
+      var audioSound = document.getElementById("audio"); 
 
     function startGame() {
         myGamePiece = new component(30, 30, "black", width / 2 , height / 2, "player");
@@ -39,13 +40,6 @@ var myGamePiece;
                     var b = event.beta; // left/right 'tilt'
                     var g = event.gamma; // forward/back 'tilt
                     
-                    console.log('alpha : ${a}\n');
-                    console.log('beta : ${b}\n');
-                    console.log('gamma : ${g}\n');
-                    // Regardless of phone direction, 
-                    //  left/right tilt should behave the same
-                    //myGamePiece.moveLeftRight = b;
-                    //myGamePiece.moveUpDown = g;
 
                     if( a > 270 || a < 90 ) {
                         if (g > 30) {
@@ -87,6 +81,7 @@ var myGamePiece;
         }
     }
 
+    
     function component(width, height, color, x, y, type) {
         this.type = type;
         this.width = width;
@@ -165,6 +160,7 @@ var myGamePiece;
         for (i = 0; i < myBoni.length; i++) {
             if (myGamePiece.crashWith(myBoni[i])) {
                 myScore.text="SCORE: " + myGameArea.frameNo * 10;
+                playSound();
                 endscore = myGameArea.frameNo * 10;
                 myScore.update();
                 myBoni[i].remove(i);
@@ -237,6 +233,11 @@ var myGamePiece;
         myGamePiece.speedX = 0; 
         myGamePiece.speedY = 0; 
     }
+
+	function playSound () {
+		audioSound.play();
+        audioSound.load();
+	}
 
     let returnScore = () => {console.log(endscore)};
 
